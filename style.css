@@ -1,0 +1,1307 @@
+/* =========================================
+   CONFIGURAÇÕES GERAIS
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+
+    --green-dark: #082f23;
+    --green: #0d4935;
+    --green-light: #176448;
+
+    --gold: #f5b942;
+    --gold-light: #ffd978;
+
+    --cream: #f7f4ea;
+
+    --white: #ffffff;
+
+    --text-light: #dce8e2;
+
+    --muted: #a9c0b6;
+
+    --danger: #e05252;
+
+    --success: #45b96b;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    min-height: 100vh;
+
+    color: var(--white);
+
+    background:
+        radial-gradient(
+            circle at 50% -20%,
+            #226b4e 0%,
+            #0d4935 35%,
+            #082f23 80%
+        );
+
+}
+
+
+/* =========================================
+   HOME
+========================================= */
+
+.screen {
+    min-height: 100vh;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.topbar {
+
+    height: 80px;
+
+    padding: 0 7%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 50;
+
+    background:
+        rgba(5, 35, 26, 0.88);
+
+    backdrop-filter:
+        blur(12px);
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.08);
+
+}
+
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.brand-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 25px;
+
+    background: var(--gold);
+
+    color: var(--green-dark);
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.2);
+
+}
+
+
+.brand strong {
+
+    display: block;
+
+    font-size: 17px;
+
+    letter-spacing: .5px;
+
+}
+
+
+.brand span {
+
+    display: block;
+
+    color: var(--gold-light);
+
+    font-size: 10px;
+
+    margin-top: 3px;
+
+}
+
+
+.player {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.xp-badge {
+
+    padding: 10px 16px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    border:
+        1px solid rgba(255,255,255,.1);
+
+    color: var(--gold-light);
+
+    font-weight: bold;
+
+}
+
+
+.player-avatar {
+
+    width: 44px;
+
+    height: 44px;
+
+    border-radius: 50%;
+
+    background: var(--gold);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 22px;
+
+}
+
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.container {
+
+    width: 86%;
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding:
+        60px 0 80px;
+
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero {
+
+    text-align: center;
+
+    margin-bottom: 45px;
+
+}
+
+
+.hero-tag {
+
+    display: inline-block;
+
+    padding:
+        8px 17px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(245,185,66,.1);
+
+    border:
+        1px solid rgba(245,185,66,.35);
+
+    color: var(--gold-light);
+
+    font-size: 12px;
+
+    margin-bottom: 18px;
+
+}
+
+
+.hero h1 {
+
+    font-size:
+        clamp(42px, 7vw, 76px);
+
+    line-height: 1;
+
+    letter-spacing: -3px;
+
+    margin-bottom: 18px;
+
+}
+
+
+.hero h1 span {
+
+    color: var(--gold);
+
+}
+
+
+.hero p {
+
+    color: var(--text-light);
+
+    font-size: 16px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+.player-status {
+
+    padding: 22px;
+
+    margin-bottom: 50px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,.07);
+
+    border:
+        1px solid rgba(255,255,255,.1);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.08);
+
+}
+
+
+.status-info {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 12px;
+
+}
+
+
+.status-info small {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    margin-bottom: 4px;
+
+}
+
+
+.status-info strong {
+
+    color: var(--gold-light);
+
+    font-size: 18px;
+
+}
+
+
+.progress-container {
+
+    height: 11px;
+
+    overflow: hidden;
+
+    border-radius: 30px;
+
+    background:
+        rgba(255,255,255,.1);
+
+}
+
+
+.progress-bar {
+
+    width: 0%;
+
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--gold),
+            var(--gold-light)
+        );
+
+    transition:
+        width .6s ease;
+
+}
+
+
+/* =========================================
+   SEÇÕES
+========================================= */
+
+.section {
+
+    margin-bottom: 50px;
+
+}
+
+
+.section-heading {
+
+    margin-bottom: 20px;
+
+}
+
+
+.section-heading > div {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.section-heading > div > span {
+
+    font-size: 30px;
+
+}
+
+
+.section-heading h2 {
+
+    font-size: 25px;
+
+}
+
+
+.section-heading p {
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    margin-top: 4px;
+
+}
+
+
+/* =========================================
+   MISSÕES
+========================================= */
+
+.missions {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 17px;
+
+}
+
+
+.mission {
+
+    text-align: left;
+
+    border: none;
+
+    min-height: 260px;
+
+    padding: 22px;
+
+    color: white;
+
+    border-radius: 21px;
+
+    cursor: pointer;
+
+    background:
+        rgba(255,255,255,.07);
+
+    border:
+        1px solid rgba(255,255,255,.09);
+
+    transition:
+        transform .25s,
+        background .25s,
+        border .25s;
+
+}
+
+
+.mission:hover {
+
+    transform:
+        translateY(-7px);
+
+    background:
+        rgba(255,255,255,.11);
+
+    border-color:
+        rgba(245,185,66,.45);
+
+}
+
+
+.mission-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    margin-bottom: 20px;
+
+}
+
+
+.mission-icon {
+
+    width: 58px;
+
+    height: 58px;
+
+    border-radius: 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 31px;
+
+    background:
+        rgba(245,185,66,.12);
+
+}
+
+
+.unlock {
+
+    font-size: 17px;
+
+}
+
+
+.mission h3 {
+
+    font-size: 18px;
+
+    margin-bottom: 9px;
+
+}
+
+
+.mission p {
+
+    color: var(--muted);
+
+    line-height: 1.5;
+
+    font-size: 13px;
+
+}
+
+
+.mission-footer {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 22px;
+
+    padding-top: 13px;
+
+    border-top:
+        1px solid rgba(255,255,255,.08);
+
+    color: var(--gold-light);
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+}
+
+
+.mission.locked {
+
+    opacity: .42;
+
+    cursor: not-allowed;
+
+}
+
+
+.mission.locked:hover {
+
+    transform: none;
+
+    border-color:
+        rgba(255,255,255,.09);
+
+}
+
+
+/* =========================================
+   DISTINTIVOS
+========================================= */
+
+.badges {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 17px;
+
+}
+
+
+.badge {
+
+    padding: 22px 15px;
+
+    text-align: center;
+
+    border-radius: 18px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+}
+
+
+.badge-icon {
+
+    width: 65px;
+
+    height: 65px;
+
+    margin:
+        0 auto 13px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(245,185,66,.13);
+
+    font-size: 30px;
+
+}
+
+
+.badge strong {
+
+    display: block;
+
+    font-size: 14px;
+
+}
+
+
+.badge small {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    line-height: 1.4;
+
+    margin-top: 6px;
+
+}
+
+
+.locked-badge {
+
+    opacity: .4;
+
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+
+    padding: 25px;
+
+    text-align: center;
+
+    border-top:
+        1px solid rgba(255,255,255,.08);
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+}
+
+
+footer span {
+
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 10px;
+
+}
+
+
+/* =========================================
+   QUIZ
+========================================= */
+
+.quiz-screen {
+
+    display: none;
+
+    min-height: 100vh;
+
+    padding: 30px 20px;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #226b4e,
+            #082f23 75%
+        );
+
+}
+
+
+.quiz-box {
+
+    width: 100%;
+
+    max-width: 800px;
+
+    margin: auto;
+
+    padding: 30px;
+
+    border-radius: 25px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    border:
+        1px solid rgba(255,255,255,.1);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.25);
+
+}
+
+
+.quiz-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 25px;
+
+}
+
+
+.back-button {
+
+    border: none;
+
+    color: white;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+}
+
+
+.quiz-category {
+
+    color: var(--gold-light);
+
+    font-weight: bold;
+
+    font-size: 12px;
+
+}
+
+
+.quiz-score {
+
+    color: var(--gold-light);
+
+    font-weight: bold;
+
+}
+
+
+.quiz-progress-info {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.question-progress {
+
+    height: 7px;
+
+    background:
+        rgba(255,255,255,.1);
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    margin-bottom: 40px;
+
+}
+
+
+.question-progress div {
+
+    height: 100%;
+
+    width: 20%;
+
+    background:
+        var(--gold);
+
+    transition: width .4s;
+
+}
+
+
+.question-area {
+
+    text-align: center;
+
+}
+
+
+.question-icon {
+
+    font-size: 52px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.question-area h2 {
+
+    max-width: 650px;
+
+    margin:
+        0 auto 30px;
+
+    font-size:
+        clamp(22px, 4vw, 31px);
+
+    line-height: 1.4;
+
+}
+
+
+.answers {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 13px;
+
+}
+
+
+.answer {
+
+    border: 2px solid
+        rgba(255,255,255,.1);
+
+    border-radius: 14px;
+
+    padding: 17px;
+
+    text-align: left;
+
+    color: white;
+
+    background:
+        rgba(255,255,255,.06);
+
+    cursor: pointer;
+
+    transition: .2s;
+
+}
+
+
+.answer:hover {
+
+    border-color:
+        var(--gold);
+
+    background:
+        rgba(245,185,66,.08);
+
+}
+
+
+.answer.correct {
+
+    border-color:
+        var(--success);
+
+    background:
+        rgba(69,185,107,.18);
+
+}
+
+
+.answer.wrong {
+
+    border-color:
+        var(--danger);
+
+    background:
+        rgba(224,82,82,.18);
+
+}
+
+
+.answer:disabled {
+
+    cursor: default;
+
+}
+
+
+.next-button {
+
+    display: none;
+
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    color: var(--green-dark);
+
+    background:
+        var(--gold);
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+.next-button:hover {
+
+    background:
+        var(--gold-light);
+
+}
+
+
+/* =========================================
+   RESULTADO
+========================================= */
+
+.result-screen {
+
+    display: none;
+
+    min-height: 100vh;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 25px;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #226b4e,
+            #082f23 75%
+        );
+
+}
+
+
+.result-box {
+
+    width: 100%;
+
+    max-width: 550px;
+
+    padding: 45px 30px;
+
+    border-radius: 28px;
+
+    text-align: center;
+
+    background:
+        var(--cream);
+
+    color: var(--green-dark);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.35);
+
+}
+
+
+.result-trophy {
+
+    font-size: 75px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.result-label {
+
+    color: #2c7355;
+
+    font-weight: bold;
+
+    font-size: 12px;
+
+}
+
+
+.result-box h2 {
+
+    font-size: 32px;
+
+    margin:
+        8px 0 12px;
+
+}
+
+
+.result-box p {
+
+    color: #65746d;
+
+    line-height: 1.6;
+
+}
+
+
+.result-stats {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 12px;
+
+    margin: 25px 0;
+
+}
+
+
+.result-stats div {
+
+    padding: 17px;
+
+    border-radius: 15px;
+
+    background:
+        #e9eee9;
+
+}
+
+
+.result-stats span {
+
+    display: block;
+
+    color: #708078;
+
+    font-size: 10px;
+
+    margin-bottom: 5px;
+
+}
+
+
+.result-stats strong {
+
+    font-size: 21px;
+
+    color: var(--green-dark);
+
+}
+
+
+.new-badge {
+
+    padding: 13px;
+
+    margin-bottom: 20px;
+
+    border-radius: 12px;
+
+    color: #795b13;
+
+    background:
+        #fff1bc;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+}
+
+
+.continue-button {
+
+    border: none;
+
+    padding:
+        14px 25px;
+
+    border-radius: 11px;
+
+    color: var(--green-dark);
+
+    background:
+        var(--gold);
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+.continue-button:hover {
+
+    background:
+        var(--gold-light);
+
+}
+
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 950px) {
+
+    .missions {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+    .badges {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .topbar {
+
+        padding: 0 5%;
+
+    }
+
+    .brand strong {
+
+        font-size: 13px;
+
+    }
+
+    .brand-icon {
+
+        width: 40px;
+
+        height: 40px;
+
+        font-size: 20px;
+
+    }
+
+    .xp-badge {
+
+        padding:
+            8px 10px;
+
+        font-size: 11px;
+
+    }
+
+    .player-avatar {
+
+        width: 38px;
+
+        height: 38px;
+
+    }
+
+    .container {
+
+        width: 90%;
+
+        padding-top: 40px;
+
+    }
+
+    .hero h1 {
+
+        font-size: 45px;
+
+    }
+
+    .missions {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+    .badges {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+    .answers {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+    .quiz-box {
+
+        padding:
+            22px 17px;
+
+    }
+
+    .result-box {
+
+        padding:
+            35px 20px;
+
+    }
+
+}

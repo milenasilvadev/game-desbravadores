@@ -1,0 +1,3648 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desbravadores — A Grande Aventura</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --bg:#071f18;
+    --bg2:#0d4935;
+    --card:rgba(255,255,255,.075);
+    --line:rgba(255,255,255,.11);
+    --gold:#f5b942;
+    --gold2:#ffd978;
+    --text:#fff;
+    --muted:#aec4ba;
+    --green:#45b96b;
+    --red:#e05252;
+    --cream:#f7f4ea;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            #287654 0,
+            #0d4935 38%,
+            #071f18 100%
+        );
+    color:var(--text);
+    min-height:100vh;
+}
+
+button,
+input{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none!important;
+}
+
+.screen{
+    min-height:100vh;
+}
+
+/* =========================
+   TELA INICIAL
+========================= */
+
+#onboarding{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+}
+
+.onboard-card{
+    width:min(720px,100%);
+    background:rgba(255,255,255,.08);
+    border:1px solid var(--line);
+    border-radius:30px;
+    padding:40px;
+    box-shadow:0 30px 80px #0006;
+    text-align:center;
+}
+
+.brand-big{
+    width:78px;
+    height:78px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:var(--gold);
+    color:var(--bg);
+    font-size:40px;
+    margin:0 auto 18px;
+}
+
+.onboard-card h1{
+    font-size:clamp(36px,7vw,64px);
+    letter-spacing:-2px;
+}
+
+.onboard-card h1 span{
+    color:var(--gold);
+}
+
+.onboard-card p{
+    color:var(--muted);
+    line-height:1.6;
+    margin:12px auto 26px;
+    max-width:560px;
+}
+
+.name-input{
+    width:100%;
+    padding:16px 18px;
+    border-radius:14px;
+    border:1px solid var(--line);
+    background:#ffffff10;
+    color:#fff;
+    outline:none;
+    margin-bottom:22px;
+}
+
+.name-input:focus{
+    border-color:var(--gold);
+}
+
+.avatar-grid{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin:12px 0 26px;
+}
+
+.avatar-choice{
+    width:58px;
+    height:58px;
+    border:2px solid transparent;
+    border-radius:16px;
+    background:#ffffff0d;
+    font-size:28px;
+}
+
+.avatar-choice.selected{
+    border-color:var(--gold);
+    background:#f5b94220;
+}
+
+.primary{
+    border:0;
+    border-radius:13px;
+    padding:14px 22px;
+    background:var(--gold);
+    color:var(--bg);
+    font-weight:800;
+}
+
+.primary:hover{
+    background:var(--gold2);
+}
+
+/* =========================
+   TOPO
+========================= */
+
+.topbar{
+    height:78px;
+    padding:0 5%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#051c16e8;
+    border-bottom:1px solid var(--line);
+    position:sticky;
+    top:0;
+    z-index:20;
+    backdrop-filter:blur(12px);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.brand-icon{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:var(--gold);
+    color:var(--bg);
+    display:grid;
+    place-items:center;
+    font-size:23px;
+}
+
+.brand strong{
+    display:block;
+    font-size:15px;
+}
+
+.brand span{
+    font-size:9px;
+    color:var(--gold2);
+}
+
+.top-actions{
+    display:flex;
+    gap:8px;
+    align-items:center;
+}
+
+.pill{
+    padding:9px 13px;
+    border-radius:22px;
+    background:#ffffff0c;
+    border:1px solid var(--line);
+    color:var(--gold2);
+    font-weight:800;
+    font-size:12px;
+}
+
+.icon-btn{
+    width:42px;
+    height:42px;
+    border:1px solid var(--line);
+    border-radius:50%;
+    background:#ffffff0a;
+    color:#fff;
+    font-size:19px;
+}
+
+/* =========================
+   CONTEÚDO
+========================= */
+
+.container{
+    width:min(1200px,90%);
+    margin:auto;
+    padding:45px 0 70px;
+}
+
+.hero{
+    text-align:center;
+    margin-bottom:34px;
+}
+
+.tag{
+    display:inline-block;
+    padding:7px 15px;
+    border:1px solid #f5b94255;
+    background:#f5b94212;
+    color:var(--gold2);
+    border-radius:25px;
+    font-size:11px;
+    font-weight:800;
+}
+
+.hero h1{
+    font-size:clamp(42px,7vw,76px);
+    line-height:1;
+    letter-spacing:-3px;
+    margin:14px 0;
+}
+
+.hero h1 span{
+    color:var(--gold);
+}
+
+.hero p{
+    color:var(--muted);
+    line-height:1.6;
+}
+
+/* =========================
+   ESTATÍSTICAS
+========================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-bottom:28px;
+}
+
+.stat{
+    padding:17px;
+    border-radius:17px;
+    background:var(--card);
+    border:1px solid var(--line);
+}
+
+.stat small{
+    display:block;
+    color:var(--muted);
+    font-size:10px;
+    margin-bottom:5px;
+}
+
+.stat strong{
+    font-size:20px;
+    color:var(--gold2);
+}
+
+/* =========================
+   PROGRESSO
+========================= */
+
+.progress-card{
+    padding:20px;
+    border-radius:19px;
+    background:var(--card);
+    border:1px solid var(--line);
+    margin-bottom:38px;
+}
+
+.progress-head{
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    margin-bottom:9px;
+}
+
+.progress-head strong{
+    color:var(--gold2);
+}
+
+.bar{
+    height:10px;
+    background:#ffffff12;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.bar>div{
+    height:100%;
+    width:0;
+    background:linear-gradient(
+        90deg,
+        var(--gold),
+        var(--gold2)
+    );
+    border-radius:20px;
+    transition:.5s;
+}
+
+/* =========================
+   MISSÕES
+========================= */
+
+.section{
+    margin-bottom:40px;
+}
+
+.section-title{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    margin-bottom:16px;
+}
+
+.section-title h2{
+    font-size:24px;
+}
+
+.section-title p{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:4px;
+}
+
+.missions{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.mission{
+    min-height:250px;
+    text-align:left;
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:20px;
+    background:var(--card);
+    color:#fff;
+    transition:.25s;
+}
+
+.mission:hover:not(.locked){
+    transform:translateY(-5px);
+    border-color:#f5b94277;
+    background:#ffffff10;
+}
+
+.mission.locked{
+    opacity:.42;
+    cursor:not-allowed;
+}
+
+.m-top{
+    display:flex;
+    justify-content:space-between;
+}
+
+.m-icon{
+    width:54px;
+    height:54px;
+    border-radius:15px;
+    background:#f5b94215;
+    display:grid;
+    place-items:center;
+    font-size:29px;
+}
+
+.mission h3{
+    font-size:17px;
+    margin:18px 0 8px;
+}
+
+.mission p{
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.5;
+}
+
+.m-foot{
+    display:flex;
+    justify-content:space-between;
+    margin-top:18px;
+    padding-top:12px;
+    border-top:1px solid var(--line);
+    font-size:10px;
+    color:var(--gold2);
+    font-weight:800;
+}
+
+/* =========================
+   MISSÃO DIÁRIA
+========================= */
+
+.daily{
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:14px;
+}
+
+.daily-card,
+.ranking-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:22px;
+}
+
+.daily-card h3{
+    margin:8px 0;
+}
+
+.daily-card p{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.5;
+}
+
+.daily-reward{
+    display:inline-block;
+    margin:14px 0;
+    color:var(--gold2);
+    font-weight:800;
+    font-size:13px;
+}
+
+/* =========================
+   RANKING
+========================= */
+
+.rank-list{
+    display:grid;
+    gap:9px;
+    margin-top:12px;
+}
+
+.rank-item{
+    display:grid;
+    grid-template-columns:35px 1fr auto;
+    gap:8px;
+    align-items:center;
+    padding:10px;
+    border-radius:12px;
+    background:#ffffff08;
+    font-size:12px;
+}
+
+.rank-avatar{
+    font-size:21px;
+}
+
+.rank-xp{
+    color:var(--gold2);
+    font-weight:800;
+}
+
+/* =========================
+   DISTINTIVOS
+========================= */
+
+.badges{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:12px;
+}
+
+.badge{
+    padding:18px 10px;
+    text-align:center;
+    border-radius:17px;
+    background:var(--card);
+    border:1px solid var(--line);
+}
+
+.badge-icon{
+    width:55px;
+    height:55px;
+    margin:auto auto 10px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:#f5b94214;
+    font-size:27px;
+}
+
+.badge strong{
+    display:block;
+    font-size:12px;
+}
+
+.badge small{
+    display:block;
+    color:var(--muted);
+    font-size:10px;
+    margin-top:5px;
+    line-height:1.3;
+}
+
+.badge.locked{
+    opacity:.35;
+}
+
+/* =========================
+   RODAPÉ
+========================= */
+
+footer{
+    text-align:center;
+    padding:24px;
+    border-top:1px solid var(--line);
+    color:var(--muted);
+    font-size:11px;
+}
+
+/* =========================
+   MODAIS
+========================= */
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:#000b;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+    z-index:100;
+}
+
+.overlay.show{
+    display:flex;
+}
+
+.modal{
+    width:min(800px,100%);
+    max-height:92vh;
+    overflow:auto;
+    background:var(--cream);
+    color:#16372b;
+    border-radius:25px;
+    padding:28px;
+    box-shadow:0 30px 90px #0008;
+}
+
+.modal.dark{
+    background:#102f26;
+    color:#fff;
+    border:1px solid var(--line);
+}
+
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.close{
+    border:0;
+    background:transparent;
+    font-size:27px;
+    color:inherit;
+}
+
+.quiz-meta{
+    display:flex;
+    justify-content:space-between;
+    color:#61766c;
+    font-size:11px;
+    margin-bottom:8px;
+}
+
+.dark .quiz-meta{
+    color:var(--muted);
+}
+
+.qbar{
+    height:7px;
+    background:#dbe2dc;
+    border-radius:20px;
+    overflow:hidden;
+    margin-bottom:28px;
+}
+
+.dark .qbar{
+    background:#ffffff14;
+}
+
+.qbar div{
+    height:100%;
+    background:var(--gold);
+    width:0;
+    transition:.4s;
+}
+
+.question-icon{
+    text-align:center;
+    font-size:52px;
+}
+
+.question{
+    font-size:23px;
+    font-weight:800;
+    text-align:center;
+    line-height:1.4;
+    margin:12px auto 22px;
+    max-width:650px;
+}
+
+.answers{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:11px;
+}
+
+.answer{
+    padding:15px;
+    border-radius:13px;
+    border:2px solid #d9dfdb;
+    background:#fff;
+    color:#16372b;
+    text-align:left;
+}
+
+.dark .answer{
+    background:#ffffff08;
+    color:#fff;
+    border-color:#ffffff15;
+}
+
+.answer:hover{
+    border-color:var(--gold);
+}
+
+.answer.correct{
+    border-color:var(--green);
+    background:#45b96b1f;
+}
+
+.answer.wrong{
+    border-color:var(--red);
+    background:#e052521f;
+}
+
+.answer:disabled{
+    cursor:default;
+}
+
+.quiz-next{
+    display:none;
+    width:100%;
+    margin-top:18px;
+    padding:14px;
+    border:0;
+    border-radius:12px;
+    background:var(--gold);
+    color:var(--bg);
+    font-weight:800;
+}
+
+/* =========================
+   RESULTADO
+========================= */
+
+.result{
+    text-align:center;
+}
+
+.result .big{
+    font-size:70px;
+}
+
+.result h2{
+    font-size:30px;
+    margin:8px 0;
+}
+
+.result p{
+    color:#66776f;
+    line-height:1.5;
+}
+
+.result-stats{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin:22px 0;
+}
+
+.result-stats div{
+    background:#e7ece7;
+    padding:15px;
+    border-radius:14px;
+}
+
+.result-stats small{
+    display:block;
+    color:#718078;
+    font-size:10px;
+}
+
+.result-stats strong{
+    font-size:21px;
+}
+
+.reward{
+    padding:12px;
+    background:#fff1bd;
+    border-radius:12px;
+    color:#735815;
+    font-weight:800;
+    font-size:13px;
+    margin-bottom:18px;
+}
+
+/* =========================
+   PERFIL
+========================= */
+
+.profile{
+    display:grid;
+    grid-template-columns:130px 1fr;
+    gap:20px;
+    align-items:center;
+}
+
+.profile-avatar{
+    width:110px;
+    height:110px;
+    border-radius:28px;
+    background:var(--gold);
+    display:grid;
+    place-items:center;
+    font-size:58px;
+}
+
+.profile h2{
+    font-size:27px;
+}
+
+.profile p{
+    color:var(--muted);
+    margin-top:5px;
+}
+
+.profile-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:25px;
+}
+
+.profile-box{
+    padding:16px;
+    background:#ffffff08;
+    border:1px solid var(--line);
+    border-radius:14px;
+}
+
+.profile-box small{
+    display:block;
+    color:var(--muted);
+    font-size:10px;
+}
+
+.profile-box strong{
+    display:block;
+    margin-top:4px;
+    color:var(--gold2);
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:200;
+    background:#123d2f;
+    color:#fff;
+    border:1px solid #f5b94255;
+    border-radius:14px;
+    padding:13px 16px;
+    box-shadow:0 12px 35px #0006;
+    display:none;
+    max-width:320px;
+    font-size:13px;
+}
+
+.toast.show{
+    display:block;
+    animation:toast .25s ease;
+}
+
+@keyframes toast{
+    from{
+        transform:translateY(15px);
+        opacity:0;
+    }
+    to{
+        transform:none;
+        opacity:1;
+    }
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media(max-width:950px){
+
+    .missions{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .badges{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:650px){
+
+    .topbar{
+        padding:0 4%;
+    }
+
+    .brand span{
+        display:none;
+    }
+
+    .container{
+        width:92%;
+        padding-top:35px;
+    }
+
+    .missions,
+    .daily{
+        grid-template-columns:1fr;
+    }
+
+    .answers{
+        grid-template-columns:1fr;
+    }
+
+    .badges{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .profile{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .profile-avatar{
+        margin:auto;
+    }
+
+    .modal{
+        padding:20px;
+    }
+
+    .hero h1{
+        letter-spacing:-2px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     TELA DE CRIAÇÃO
+========================= -->
+
+<section id="onboarding" class="screen">
+
+    <div class="onboard-card">
+
+        <div class="brand-big">
+            🧭
+        </div>
+
+        <div class="tag">
+            🏕️ DESBRAVADORES
+        </div>
+
+        <h1>
+            A Grande <span>Aventura</span>
+        </h1>
+
+        <p>
+            Um jogo de desafios, conhecimentos e conquistas.
+            Crie seu personagem e comece sua jornada.
+        </p>
+
+        <input
+            id="playerNameInput"
+            class="name-input"
+            maxlength="20"
+            placeholder="Digite o nome do desbravador"
+        >
+
+        <div>
+            <strong>Escolha seu avatar</strong>
+        </div>
+
+        <div id="avatarGrid" class="avatar-grid"></div>
+
+        <button
+            class="primary"
+            onclick="createPlayer()"
+        >
+            COMEÇAR A AVENTURA 🚀
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     JOGO
+========================= -->
+
+<section id="game" class="screen hidden">
+
+<header class="topbar">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            🧭
+        </div>
+
+        <div>
+            <strong>DESBRAVADORES</strong>
+            <span>A GRANDE AVENTURA</span>
+        </div>
+
+    </div>
+
+    <div class="top-actions">
+
+        <div class="pill">
+            ⭐ <span id="headerXP">0</span> XP
+        </div>
+
+        <button
+            class="icon-btn"
+            onclick="openProfile()"
+        >
+            👤
+        </button>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+<section class="hero">
+
+    <span class="tag">
+        🔥 SUA JORNADA COMEÇA AGORA
+    </span>
+
+    <h1>
+        A Grande <span>Aventura</span>
+    </h1>
+
+    <p id="welcomeText">
+        Explore, aprenda, supere desafios e conquiste seus distintivos.
+    </p>
+
+</section>
+
+
+<!-- ESTATÍSTICAS -->
+
+<section class="stats">
+
+    <div class="stat">
+        <small>NÍVEL</small>
+        <strong id="level">1</strong>
+    </div>
+
+    <div class="stat">
+        <small>XP</small>
+        <strong id="xpStat">0</strong>
+    </div>
+
+    <div class="stat">
+        <small>MOEDAS</small>
+        <strong id="coins">50</strong>
+    </div>
+
+    <div class="stat">
+        <small>MISSÕES</small>
+        <strong id="missionsDone">0</strong>
+    </div>
+
+</section>
+
+
+<!-- BARRA DE XP -->
+
+<section class="progress-card">
+
+    <div class="progress-head">
+
+        <span>
+            Progresso para o próximo nível
+        </span>
+
+        <strong>
+            <span id="levelXP">0</span> / 500 XP
+        </strong>
+
+    </div>
+
+    <div class="bar">
+        <div id="mainProgress"></div>
+    </div>
+
+</section>
+
+
+<!-- MAPA -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <div>
+
+            <h2>
+                🗺️ Mapa de Aventuras
+            </h2>
+
+            <p>
+                Complete desafios para desbloquear novas regiões.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div id="missions" class="missions"></div>
+
+</section>
+
+
+<!-- MISSÃO DIÁRIA -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <div>
+
+            <h2>
+                🎯 Missão do Dia
+            </h2>
+
+            <p>
+                Uma nova oportunidade de ganhar recompensas.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="daily">
+
+        <div class="daily-card">
+
+            <span class="tag">
+                MISSÃO DIÁRIA
+            </span>
+
+            <h3 id="dailyTitle">
+                Carregando...
+            </h3>
+
+            <p id="dailyDesc"></p>
+
+            <span class="daily-reward">
+                ⭐ +100 XP
+                &nbsp;
+                🪙 +30 moedas
+            </span>
+
+            <br>
+
+            <button
+                id="dailyBtn"
+                class="primary"
+                onclick="startDaily()"
+            >
+                COMEÇAR MISSÃO
+            </button>
+
+        </div>
+
+
+        <div class="ranking-card">
+
+            <strong>
+                🏆 Ranking da equipe
+            </strong>
+
+            <p
+                style="
+                color:var(--muted);
+                font-size:11px;
+                margin-top:4px;
+                "
+            >
+                Ranking de demonstração local
+            </p>
+
+            <div
+                id="ranking"
+                class="rank-list"
+            ></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- DISTINTIVOS -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <div>
+
+            <h2>
+                🏅 Distintivos
+            </h2>
+
+            <p>
+                Suas conquistas.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div
+        id="badges"
+        class="badges"
+    ></div>
+
+</section>
+
+</main>
+
+
+<footer>
+    🧭 Desbravadores — A Grande Aventura · Protótipo jogável
+</footer>
+
+</section>
+
+
+<!-- =========================
+     QUIZ
+========================= -->
+
+<div
+    id="quizOverlay"
+    class="overlay"
+>
+
+    <div class="modal dark">
+
+        <div class="modal-head">
+
+            <div>
+                <strong id="quizTitle">
+                    DESAFIO
+                </strong>
+            </div>
+
+            <button
+                class="close"
+                onclick="closeQuiz()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="quiz-meta">
+
+            <span id="qNumber">
+                Pergunta 1 de 6
+            </span>
+
+            <span>
+                Acertos:
+                <b id="qScore">0</b>
+            </span>
+
+        </div>
+
+
+        <div class="qbar">
+            <div id="qProgress"></div>
+        </div>
+
+
+        <div id="quizBody">
+
+            <div
+                id="qIcon"
+                class="question-icon"
+            >
+                🌿
+            </div>
+
+            <div
+                id="qText"
+                class="question"
+            ></div>
+
+            <div
+                id="answers"
+                class="answers"
+            ></div>
+
+            <button
+                id="quizNext"
+                class="quiz-next"
+                onclick="nextQuestion()"
+            >
+                Próxima pergunta →
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     RESULTADO
+========================= -->
+
+<div
+    id="resultOverlay"
+    class="overlay"
+>
+
+    <div class="modal">
+
+        <div class="result">
+
+            <div class="big">
+                🏆
+            </div>
+
+            <span class="tag">
+                MISSÃO CONCLUÍDA
+            </span>
+
+            <h2 id="resultTitle">
+                Excelente!
+            </h2>
+
+            <p id="resultMsg"></p>
+
+
+            <div class="result-stats">
+
+                <div>
+
+                    <small>
+                        ACERTOS
+                    </small>
+
+                    <strong id="finalScore">
+                        0/6
+                    </strong>
+
+                </div>
+
+                <div>
+
+                    <small>
+                        RECOMPENSA
+                    </small>
+
+                    <strong id="finalReward">
+                        +0 XP
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="resultBadge"
+                class="reward"
+            >
+                🏅 Missão concluída!
+            </div>
+
+
+            <button
+                class="primary"
+                onclick="closeResult()"
+            >
+                CONTINUAR AVENTURA
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     PERFIL
+========================= -->
+
+<div
+    id="profileOverlay"
+    class="overlay"
+>
+
+    <div class="modal dark">
+
+        <div class="modal-head">
+
+            <strong>
+                👤 PERFIL DO DESBRAVADOR
+            </strong>
+
+            <button
+                class="close"
+                onclick="closeProfile()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="profile">
+
+            <div
+                id="profileAvatar"
+                class="profile-avatar"
+            >
+                🧑
+            </div>
+
+            <div>
+
+                <h2 id="profileName">
+                    Nome
+                </h2>
+
+                <p id="profileLevel">
+                    Nível 1
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-grid">
+
+            <div class="profile-box">
+
+                <small>
+                    XP TOTAL
+                </small>
+
+                <strong id="profileXP">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="profile-box">
+
+                <small>
+                    MOEDAS
+                </small>
+
+                <strong id="profileCoins">
+                    50
+                </strong>
+
+            </div>
+
+
+            <div class="profile-box">
+
+                <small>
+                    MISSÕES CONCLUÍDAS
+                </small>
+
+                <strong id="profileMissions">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="profile-box">
+
+                <small>
+                    DISTINTIVOS
+                </small>
+
+                <strong id="profileBadges">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="primary"
+            style="margin-top:22px"
+            onclick="resetGame()"
+        >
+            REINICIAR JORNADA
+        </button>
+
+    </div>
+
+</div>
+
+
+<div
+    id="toast"
+    class="toast"
+></div>
+
+
+<script>
+
+/* =========================================================
+   CONFIGURAÇÃO
+========================================================= */
+
+const STORAGE_KEY =
+    "desbravadores_grande_aventura_v2";
+
+
+let selectedAvatar = "🧑‍🚀";
+
+let player = null;
+
+let currentQuiz = null;
+
+let currentIndex = 0;
+
+let currentScore = 0;
+
+let answered = false;
+
+let currentMissionId = null;
+
+
+/* =========================================================
+   AVATARES
+========================================================= */
+
+const avatars = [
+    "🧑‍🚀",
+    "👩‍🚀",
+    "🧑",
+    "👩",
+    "🧒",
+    "👦",
+    "👧",
+    "🧭"
+];
+
+
+/* =========================================================
+   MISSÕES
+========================================================= */
+
+const missionsData = [
+
+    {
+        id:"natureza",
+        title:"Explorador da Natureza",
+        icon:"🌿",
+        desc:"Animais, plantas, biomas e preservação.",
+        unlock:0,
+        xp:150
+    },
+
+    {
+        id:"biblia",
+        title:"Desafio Bíblico",
+        icon:"📖",
+        desc:"Histórias, personagens e conhecimentos bíblicos.",
+        unlock:0,
+        xp:150
+    },
+
+    {
+        id:"acampamento",
+        title:"Vida de Acampamento",
+        icon:"🏕️",
+        desc:"Equipamentos, segurança, nós e vida ao ar livre.",
+        unlock:0,
+        xp:150
+    },
+
+    {
+        id:"orientacao",
+        title:"Mestre da Orientação",
+        icon:"🧭",
+        desc:"Bússola, mapas, direções e navegação.",
+        unlock:1,
+        xp:180
+    },
+
+    {
+        id:"nos",
+        title:"Mestre dos Nós",
+        icon:"🪢",
+        desc:"Conheça aplicações e princípios dos nós.",
+        unlock:2,
+        xp:180
+    },
+
+    {
+        id:"primeiros",
+        title:"Primeiros Socorros",
+        icon:"🚑",
+        desc:"Conhecimentos básicos de segurança e primeiros cuidados.",
+        unlock:3,
+        xp:200
+    },
+
+    {
+        id:"historia",
+        title:"História dos Desbravadores",
+        icon:"🏅",
+        desc:"Conheça a história, símbolos e valores do clube.",
+        unlock:4,
+        xp:220
+    },
+
+    {
+        id:"grande",
+        title:"Grande Explorador",
+        icon:"🏆",
+        desc:"O desafio final da primeira jornada.",
+        unlock:6,
+        xp:300
+    }
+
+];
+
+
+/* =========================================================
+   PERGUNTAS
+========================================================= */
+
+const quizzes = {
+
+natureza:{
+    title:"🌿 EXPLORADOR DA NATUREZA",
+    icon:"🌿",
+
+    questions:[
+
+        [
+            "Qual é o maior animal terrestre?",
+            [
+                "Elefante",
+                "Girafa",
+                "Hipopótamo",
+                "Rinoceronte"
+            ],
+            0
+        ],
+
+        [
+            "Qual elemento é essencial para a fotossíntese?",
+            [
+                "Luz solar",
+                "Plástico",
+                "Areia",
+                "Ferro"
+            ],
+            0
+        ],
+
+        [
+            "Qual destes animais é mamífero?",
+            [
+                "Tubarão",
+                "Golfinho",
+                "Tartaruga",
+                "Cobra"
+            ],
+            1
+        ],
+
+        [
+            "Qual gás as plantas absorvem na fotossíntese?",
+            [
+                "Oxigênio",
+                "Hélio",
+                "Gás carbônico",
+                "Hidrogênio"
+            ],
+            2
+        ],
+
+        [
+            "Qual é o maior bioma brasileiro em extensão?",
+            [
+                "Caatinga",
+                "Amazônia",
+                "Pantanal",
+                "Pampa"
+            ],
+            1
+        ],
+
+        [
+            "Qual atitude ajuda a preservar a natureza?",
+            [
+                "Deixar lixo",
+                "Recolher o próprio lixo",
+                "Quebrar plantas",
+                "Alimentar animais silvestres"
+            ],
+            1
+        ]
+
+    ]
+},
+
+
+biblia:{
+    title:"📖 DESAFIO BÍBLICO",
+    icon:"📖",
+
+    questions:[
+
+        [
+            "Qual é o primeiro livro da Bíblia?",
+            [
+                "Êxodo",
+                "Gênesis",
+                "Salmos",
+                "Mateus"
+            ],
+            1
+        ],
+
+        [
+            "Quem construiu a arca?",
+            [
+                "Moisés",
+                "Abraão",
+                "Noé",
+                "Davi"
+            ],
+            2
+        ],
+
+        [
+            "Quem derrotou Golias?",
+            [
+                "Davi",
+                "Salomão",
+                "Josué",
+                "Samuel"
+            ],
+            0
+        ],
+
+        [
+            "Qual destes livros pertence ao Novo Testamento?",
+            [
+                "Gênesis",
+                "Isaías",
+                "Mateus",
+                "Salmos"
+            ],
+            2
+        ],
+
+        [
+            "Quem foi lançado na cova dos leões?",
+            [
+                "Daniel",
+                "Pedro",
+                "Paulo",
+                "Elias"
+            ],
+            0
+        ],
+
+        [
+            "Quem recebeu os Dez Mandamentos?",
+            [
+                "Moisés",
+                "Davi",
+                "José",
+                "João"
+            ],
+            0
+        ]
+
+    ]
+},
+
+
+acampamento:{
+    title:"🏕️ VIDA DE ACAMPAMENTO",
+    icon:"🏕️",
+
+    questions:[
+
+        [
+            "Qual equipamento ajuda a encontrar direções?",
+            [
+                "Bússola",
+                "Cantil",
+                "Mochila",
+                "Lanterna"
+            ],
+            0
+        ],
+
+        [
+            "Qual destes é um tipo conhecido de nó?",
+            [
+                "Direito",
+                "Triangular",
+                "Oval",
+                "Redondo"
+            ],
+            0
+        ],
+
+        [
+            "Antes de acender uma fogueira, devemos:",
+            [
+                "Ignorar regras",
+                "Verificar segurança e regras do local",
+                "Usar gasolina",
+                "Acender dentro da barraca"
+            ],
+            1
+        ],
+
+        [
+            "Qual item é usado para transportar água?",
+            [
+                "Cantil",
+                "Travesseiro",
+                "Caderno",
+                "Apito"
+            ],
+            0
+        ],
+
+        [
+            "Uma boa prática em uma atividade ao ar livre é:",
+            [
+                "Deixar lixo",
+                "Respeitar o ambiente",
+                "Destruir plantas",
+                "Assustar animais"
+            ],
+            1
+        ],
+
+        [
+            "Em uma caminhada, é importante:",
+            [
+                "Ignorar o grupo",
+                "Levar água e seguir orientação responsável",
+                "Andar sem avisar ninguém",
+                "Abandonar a trilha"
+            ],
+            1
+        ]
+
+    ]
+},
+
+
+orientacao:{
+    title:"🧭 MESTRE DA ORIENTAÇÃO",
+    icon:"🧭",
+
+    questions:[
+
+        [
+            "Qual instrumento tradicional ajuda a indicar direções?",
+            [
+                "Bússola",
+                "Termômetro",
+                "Cronômetro",
+                "Barômetro"
+            ],
+            0
+        ],
+
+        [
+            "Qual é a direção oposta ao norte?",
+            [
+                "Sul",
+                "Leste",
+                "Oeste",
+                "Nordeste"
+            ],
+            0
+        ],
+
+        [
+            "Em um mapa, uma legenda serve para:",
+            [
+                "Explicar símbolos e informações",
+                "Medir temperatura",
+                "Acender fogo",
+                "Contar passos"
+            ],
+            0
+        ],
+
+        [
+            "Qual ponto cardeal fica entre norte e leste?",
+            [
+                "Noroeste",
+                "Nordeste",
+                "Sudeste",
+                "Sudoeste"
+            ],
+            1
+        ],
+
+        [
+            "Para uma atividade de orientação, é importante:",
+            [
+                "Planejar a rota",
+                "Ignorar o mapa",
+                "Separar-se do grupo",
+                "Andar sem referência"
+            ],
+            0
+        ],
+
+        [
+            "Qual item pode ajudar a marcar uma rota de forma segura?",
+            [
+                "Mapa",
+                "Objeto cortante",
+                "Fogo",
+                "Lixo"
+            ],
+            0
+        ]
+
+    ]
+},
+
+
+nos:{
+    title:"🪢 MESTRE DOS NÓS",
+    icon:"🪢",
+
+    questions:[
+
+        [
+            "Um nó pode ser usado para:",
+            [
+                "Fixar ou unir cordas",
+                "Substituir água",
+                "Medir temperatura",
+                "Acender uma tela"
+            ],
+            0
+        ],
+
+        [
+            "Qual destes é um nome conhecido de nó?",
+            [
+                "Nó direito",
+                "Nó triangular",
+                "Nó quadrado lunar",
+                "Nó de seta"
+            ],
+            0
+        ],
+
+        [
+            "Antes de usar uma corda, devemos:",
+            [
+                "Verificar suas condições",
+                "Ignorar desgastes",
+                "Molhar sempre",
+                "Cortar sem motivo"
+            ],
+            0
+        ],
+
+        [
+            "Nós devem ser praticados:",
+            [
+                "Com orientação adequada",
+                "Sem aprender a aplicação",
+                "Somente em árvores",
+                "Com qualquer material perigoso"
+            ],
+            0
+        ],
+
+        [
+            "Ao ensinar um nó, é importante conhecer:",
+            [
+                "Sua aplicação",
+                "Somente o nome",
+                "A cor da corda",
+                "O peso da mochila"
+            ],
+            0
+        ],
+
+        [
+            "Segurança durante atividades com cordas exige:",
+            [
+                "Supervisão e equipamento adequado",
+                "Improviso",
+                "Correr segurando a corda",
+                "Ignorar instruções"
+            ],
+            0
+        ]
+
+    ]
+},
+
+
+primeiros:{
+    title:"🚑 PRIMEIROS SOCORROS",
+    icon:"🚑",
+
+    questions:[
+
+        [
+            "Em uma emergência, a primeira prioridade é:",
+            [
+                "Garantir segurança e buscar ajuda",
+                "Correr sem avaliar",
+                "Dar qualquer medicamento",
+                "Ignorar a situação"
+            ],
+            0
+        ],
+
+        [
+            "Ao encontrar alguém inconsciente, devemos:",
+            [
+                "Acionar ajuda de emergência e avaliar a situação com segurança",
+                "Dar comida",
+                "Sacudir violentamente",
+                "Deixar sozinho"
+            ],
+            0
+        ],
+
+        [
+            "Um kit de primeiros socorros deve ser:",
+            [
+                "Adequado e organizado",
+                "Cheio de objetos aleatórios",
+                "Guardado sem identificação",
+                "Usado como brinquedo"
+            ],
+            0
+        ],
+
+        [
+            "Em caso de dúvida durante uma emergência, é melhor:",
+            [
+                "Buscar ajuda profissional",
+                "Improvisar um tratamento arriscado",
+                "Ignorar",
+                "Esperar sem avisar ninguém"
+            ],
+            0
+        ],
+
+        [
+            "O objetivo dos primeiros socorros é principalmente:",
+            [
+                "Preservar a vida e reduzir danos até ajuda adequada",
+                "Substituir profissionais",
+                "Diagnosticar qualquer doença",
+                "Fazer cirurgias"
+            ],
+            0
+        ],
+
+        [
+            "Em atividades de clube, prevenção significa:",
+            [
+                "Identificar riscos antes da atividade",
+                "Ignorar o ambiente",
+                "Correr riscos desnecessários",
+                "Não planejar"
+            ],
+            0
+        ]
+
+    ]
+},
+
+
+historia:{
+    title:"🏅 HISTÓRIA DOS DESBRAVADORES",
+    icon:"🏅",
+
+    questions:[
+
+        [
+            "O Clube de Desbravadores é conhecido por desenvolver:",
+            [
+                "Habilidades, serviço, liderança e espiritualidade",
+                "Somente competição",
+                "Somente esportes",
+                "Somente jogos"
+            ],
+            0
+        ],
+
+        [
+            "Uma atividade típica de um clube pode envolver:",
+            [
+                "Natureza e acampamento",
+                "Somente videogame",
+                "Somente compras",
+                "Somente televisão"
+            ],
+            0
+        ],
+
+        [
+            "O serviço ao próximo é um valor importante em:",
+            [
+                "Atividades de Desbravadores",
+                "Nenhuma atividade",
+                "Apenas competições",
+                "Apenas viagens"
+            ],
+            0
+        ],
+
+        [
+            "Uma especialidade representa:",
+            [
+                "Uma oportunidade de aprender e desenvolver uma habilidade",
+                "Uma punição",
+                "Um prêmio sem aprendizagem",
+                "Um jogo obrigatório"
+            ],
+            0
+        ],
+
+        [
+            "O uniforme e os símbolos do clube ajudam a:",
+            [
+                "Representar identidade e organização",
+                "Substituir treinamento",
+                "Evitar atividades",
+                "Escolher notas escolares"
+            ],
+            0
+        ],
+
+        [
+            "Liderança saudável envolve:",
+            [
+                "Responsabilidade, respeito e exemplo",
+                "Mandar sem ouvir",
+                "Ignorar equipe",
+                "Competir com colegas"
+            ],
+            0
+        ]
+
+    ]
+},
+
+
+grande:{
+    title:"🏆 GRANDE EXPLORADOR",
+    icon:"🏆",
+
+    questions:[
+
+        [
+            "Qual é uma característica importante de um bom desbravador?",
+            [
+                "Responsabilidade",
+                "Desrespeito",
+                "Individualismo extremo",
+                "Descuido"
+            ],
+            0
+        ],
+
+        [
+            "Em uma missão em equipe, devemos:",
+            [
+                "Cooperar e respeitar os colegas",
+                "Esconder informações",
+                "Abandonar a equipe",
+                "Competir contra todos"
+            ],
+            0
+        ],
+
+        [
+            "Ao aprender uma habilidade nova, o melhor caminho é:",
+            [
+                "Praticar com orientação e segurança",
+                "Improvisar sempre",
+                "Ignorar instruções",
+                "Desistir no primeiro erro"
+            ],
+            0
+        ],
+
+        [
+            "Em contato com a natureza, devemos:",
+            [
+                "Cuidar e respeitar o ambiente",
+                "Deixar lixo",
+                "Destruir plantas",
+                "Perturbar animais"
+            ],
+            0
+        ],
+
+        [
+            "O que combina com espírito de serviço?",
+            [
+                "Ajudar quem precisa",
+                "Pensar somente em si",
+                "Evitar responsabilidades",
+                "Ignorar a comunidade"
+            ],
+            0
+        ],
+
+        [
+            "O verdadeiro progresso é:",
+            [
+                "Aprender, servir e evoluir",
+                "Ter apenas pontos",
+                "Ganhar sem aprender",
+                "Nunca cometer erros"
+            ],
+            0
+        ]
+
+    ]
+}
+
+};
+
+
+/* =========================================================
+   DISTINTIVOS
+========================================================= */
+
+const badgesData = [
+
+    {
+        id:"primeiro",
+        icon:"🌱",
+        name:"Primeiro Passo",
+        desc:"Complete sua primeira missão."
+    },
+
+    {
+        id:"natureza",
+        icon:"🌿",
+        name:"Amigo da Natureza",
+        desc:"Complete Natureza."
+    },
+
+    {
+        id:"biblia",
+        icon:"📖",
+        name:"Conhecedor da Bíblia",
+        desc:"Complete Bíblia."
+    },
+
+    {
+        id:"acampamento",
+        icon:"🏕️",
+        name:"Aventureiro",
+        desc:"Complete Acampamento."
+    },
+
+    {
+        id:"orientacao",
+        icon:"🧭",
+        name:"Navegador",
+        desc:"Complete Orientação."
+    },
+
+    {
+        id:"nos",
+        icon:"🪢",
+        name:"Mestre dos Nós",
+        desc:"Complete Nós."
+    },
+
+    {
+        id:"primeiros",
+        icon:"🚑",
+        name:"Guardião",
+        desc:"Complete Primeiros Socorros."
+    },
+
+    {
+        id:"historia",
+        icon:"🏅",
+        name:"Historiador",
+        desc:"Complete História."
+    },
+
+    {
+        id:"1000xp",
+        icon:"⭐",
+        name:"Mil XP",
+        desc:"Alcance 1000 XP."
+    },
+
+    {
+        id:"grande",
+        icon:"🏆",
+        name:"Grande Explorador",
+        desc:"Complete o desafio final."
+    }
+
+];
+
+
+/* =========================================================
+   MISSÕES DIÁRIAS
+========================================================= */
+
+const dailyTasks = [
+
+    {
+        title:"Quiz Relâmpago",
+        desc:"Complete uma missão qualquer do mapa.",
+        action:"any"
+    },
+
+    {
+        title:"Desbravador da Natureza",
+        desc:"Complete o desafio de Natureza.",
+        action:"natureza"
+    },
+
+    {
+        title:"Conhecimento Bíblico",
+        desc:"Complete o desafio Bíblico.",
+        action:"biblia"
+    },
+
+    {
+        title:"Dia de Aventura",
+        desc:"Complete Acampamento.",
+        action:"acampamento"
+    }
+
+];
+
+
+/* =========================================================
+   JOGADOR
+========================================================= */
+
+function defaultPlayer(name){
+
+    return {
+
+        name:name || "Desbravador",
+
+        avatar:selectedAvatar,
+
+        xp:0,
+
+        coins:50,
+
+        completed:[],
+
+        badges:[],
+
+        dailyDate:"",
+
+        dailyDone:false
+
+    };
+
+}
+
+
+/* =========================================================
+   SALVAR
+========================================================= */
+
+function save(){
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(player)
+    );
+
+}
+
+
+/* =========================================================
+   CARREGAR
+========================================================= */
+
+function load(){
+
+    try{
+
+        const raw =
+            localStorage.getItem(STORAGE_KEY);
+
+        if(raw){
+
+            player =
+                JSON.parse(raw);
+
+        }
+
+    }catch(e){
+
+        player=null;
+
+    }
+
+}
+
+
+/* =========================================================
+   SEGURANÇA DO NOME
+========================================================= */
+
+function esc(s){
+
+    return String(s).replace(
+        /[&<>"']/g,
+        m => ({
+            "&":"&amp;",
+            "<":"&lt;",
+            ">":"&gt;",
+            '"':"&quot;",
+            "'":"&#039;"
+        }[m])
+    );
+
+}
+
+
+/* =========================================================
+   AVATARES
+========================================================= */
+
+function initAvatars(){
+
+    const grid =
+        document.getElementById(
+            "avatarGrid"
+        );
+
+    grid.innerHTML="";
+
+    avatars.forEach((a,i)=>{
+
+        const b =
+            document.createElement(
+                "button"
+            );
+
+        b.className =
+            "avatar-choice" +
+            (i===0 ? " selected" : "");
+
+        b.textContent=a;
+
+        b.onclick=()=>{
+
+            selectedAvatar=a;
+
+            document
+                .querySelectorAll(
+                    ".avatar-choice"
+                )
+                .forEach(x =>
+                    x.classList.remove(
+                        "selected"
+                    )
+                );
+
+            b.classList.add(
+                "selected"
+            );
+
+        };
+
+        grid.appendChild(b);
+
+    });
+
+}
+
+
+/* =========================================================
+   CRIAR JOGADOR
+========================================================= */
+
+function createPlayer(){
+
+    const name =
+        document
+            .getElementById(
+                "playerNameInput"
+            )
+            .value
+            .trim();
+
+    if(!name){
+
+        toast(
+            "Digite o nome do desbravador."
+        );
+
+        return;
+    }
+
+    player =
+        defaultPlayer(name);
+
+    save();
+
+    showGame();
+
+}
+
+
+/* =========================================================
+   MOSTRAR JOGO
+========================================================= */
+
+function showGame(){
+
+    document
+        .getElementById(
+            "onboarding"
+        )
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById(
+            "game"
+        )
+        .classList
+        .remove("hidden");
+
+    renderAll();
+
+}
+
+
+/* =========================================================
+   NÍVEL
+========================================================= */
+
+function level(){
+
+    return Math.floor(
+        player.xp / 500
+    ) + 1;
+
+}
+
+
+/* =========================================================
+   RENDERIZA TUDO
+========================================================= */
+
+function renderAll(){
+
+    document.getElementById(
+        "headerXP"
+    ).textContent=player.xp;
+
+    document.getElementById(
+        "xpStat"
+    ).textContent=player.xp;
+
+    document.getElementById(
+        "coins"
+    ).textContent=player.coins;
+
+    document.getElementById(
+        "missionsDone"
+    ).textContent=
+        player.completed.length;
+
+    document.getElementById(
+        "level"
+    ).textContent=level();
+
+    document.getElementById(
+        "levelXP"
+    ).textContent=
+        player.xp % 500;
+
+    document.getElementById(
+        "mainProgress"
+    ).style.width =
+        ((player.xp % 500)/500*100)+"%";
+
+    document.getElementById(
+        "welcomeText"
+    ).textContent =
+        `Bem-vindo, ${player.name}! Explore, aprenda, supere desafios e conquiste seus distintivos.`;
+
+    renderMissions();
+
+    renderBadges();
+
+    renderDaily();
+
+    renderRanking();
+
+    checkBadges();
+
+}
+
+
+/* =========================================================
+   DESBLOQUEIO
+========================================================= */
+
+function isUnlocked(m){
+
+    return player.completed.length >=
+        m.unlock;
+
+}
+
+
+/* =========================================================
+   MISSÕES
+========================================================= */
+
+function renderMissions(){
+
+    const box =
+        document.getElementById(
+            "missions"
+        );
+
+    box.innerHTML="";
+
+    missionsData.forEach(m=>{
+
+        const done =
+            player.completed.includes(
+                m.id
+            );
+
+        const unlocked =
+            isUnlocked(m);
+
+        const b =
+            document.createElement(
+                "button"
+            );
+
+        b.className =
+            "mission" +
+            (!unlocked ? " locked" : "");
+
+        b.innerHTML=`
+
+            <div class="m-top">
+
+                <div class="m-icon">
+                    ${m.icon}
+                </div>
+
+                <span>
+                    ${
+                        done
+                        ? "✅"
+                        : unlocked
+                        ? "🔓"
+                        : "🔒"
+                    }
+                </span>
+
+            </div>
+
+            <h3>
+                ${m.title}
+            </h3>
+
+            <p>
+                ${m.desc}
+            </p>
+
+            <div class="m-foot">
+
+                <span>
+                    ${
+                        done
+                        ? "CONCLUÍDA"
+                        : unlocked
+                        ? "6 perguntas"
+                        : "Complete mais missões"
+                    }
+                </span>
+
+                <span>
+                    +${m.xp} XP
+                </span>
+
+            </div>
+
+        `;
+
+        b.onclick=()=>{
+
+            if(unlocked){
+
+                startQuiz(m.id);
+
+            }else{
+
+                toast(
+                    `🔒 Complete pelo menos ${m.unlock} missão(ões) para desbloquear esta aventura.`
+                );
+
+            }
+
+        };
+
+        box.appendChild(b);
+
+    });
+
+}
+
+
+/* =========================================================
+   DISTINTIVOS
+========================================================= */
+
+function renderBadges(){
+
+    const box =
+        document.getElementById(
+            "badges"
+        );
+
+    box.innerHTML="";
+
+    badgesData.forEach(b=>{
+
+        const on =
+            player.badges.includes(
+                b.id
+            );
+
+        const d =
+            document.createElement(
+                "div"
+            );
+
+        d.className =
+            "badge" +
+            (on ? "" : " locked");
+
+        d.innerHTML=`
+
+            <div class="badge-icon">
+                ${b.icon}
+            </div>
+
+            <strong>
+                ${b.name}
+            </strong>
+
+            <small>
+                ${b.desc}
+            </small>
+
+        `;
+
+        box.appendChild(d);
+
+    });
+
+}
+
+
+/* =========================================================
+   MISSÃO DIÁRIA
+========================================================= */
+
+function daily(){
+
+    const day =
+        new Date()
+            .toISOString()
+            .slice(0,10);
+
+    if(player.dailyDate !== day){
+
+        const idx =
+            new Date().getDate()
+            % dailyTasks.length;
+
+        player.dailyDate=day;
+
+        player.dailyDone=false;
+
+        player.dailyTask =
+            dailyTasks[idx];
+
+        save();
+
+    }
+
+    return player.dailyTask ||
+        dailyTasks[0];
+
+}
+
+
+/* =========================================================
+   RENDER MISSÃO DIÁRIA
+========================================================= */
+
+function renderDaily(){
+
+    const d=daily();
+
+    document.getElementById(
+        "dailyTitle"
+    ).textContent=d.title;
+
+    document.getElementById(
+        "dailyDesc"
+    ).textContent=d.desc;
+
+    const btn =
+        document.getElementById(
+            "dailyBtn"
+        );
+
+    btn.textContent =
+        player.dailyDone
+        ? "✅ MISSÃO CONCLUÍDA"
+        : "COMEÇAR MISSÃO";
+
+    btn.disabled =
+        player.dailyDone;
+
+    btn.style.opacity =
+        player.dailyDone
+        ? ".55"
+        : "1";
+
+}
+
+
+/* =========================================================
+   INICIAR MISSÃO DIÁRIA
+========================================================= */
+
+function startDaily(){
+
+    const d=daily();
+
+    if(player.dailyDone){
+
+        return;
+
+    }
+
+    if(d.action==="any"){
+
+        const available =
+            missionsData.find(
+                m => isUnlocked(m)
+            );
+
+        if(available){
+
+            startQuiz(
+                available.id
+            );
+
+        }else{
+
+            startQuiz("natureza");
+
+        }
+
+    }else{
+
+        startQuiz(d.action);
+
+    }
+
+}
+
+
+/* =========================================================
+   RANKING
+========================================================= */
+
+function renderRanking(){
+
+    const names=[
+
+        {
+            n:"Rafa",
+            a:"🧑",
+            x:1320
+        },
+
+        {
+            n:"Lívia",
+            a:"👩",
+            x:980
+        },
+
+        {
+            n:"João",
+            a:"🧒",
+            x:760
+        },
+
+        {
+            n:player.name,
+            a:player.avatar,
+            x:player.xp
+        },
+
+        {
+            n:"Ana",
+            a:"👧",
+            x:420
+        }
+
+    ].sort(
+        (a,b)=>b.x-a.x
+    );
+
+    document.getElementById(
+        "ranking"
+    ).innerHTML=
+
+        names.map(
+            (r,i)=>`
+
+            <div class="rank-item">
+
+                <b>
+                    ${i+1}º
+                </b>
+
+                <span>
+                    <span class="rank-avatar">
+                        ${r.a}
+                    </span>
+
+                    ${esc(r.n)}
+                </span>
+
+                <span class="rank-xp">
+                    ${r.x} XP
+                </span>
+
+            </div>
+
+        `
+        ).join("");
+
+}
+
+
+/* =========================================================
+   BADGES AUTOMÁTICOS
+========================================================= */
+
+function checkBadges(){
+
+    const rules=[
+
+        [
+            "primeiro",
+            ()=>player.completed.length>=1
+        ],
+
+        [
+            "natureza",
+            ()=>player.completed.includes(
+                "natureza"
+            )
+        ],
+
+        [
+            "biblia",
+            ()=>player.completed.includes(
+                "biblia"
+            )
+        ],
+
+        [
+            "acampamento",
+            ()=>player.completed.includes(
+                "acampamento"
+            )
+        ],
+
+        [
+            "orientacao",
+            ()=>player.completed.includes(
+                "orientacao"
+            )
+        ],
+
+        [
+            "nos",
+            ()=>player.completed.includes(
+                "nos"
+            )
+        ],
+
+        [
+            "primeiros",
+            ()=>player.completed.includes(
+                "primeiros"
+            )
+        ],
+
+        [
+            "historia",
+            ()=>player.completed.includes(
+                "historia"
+            )
+        ],
+
+        [
+            "1000xp",
+            ()=>player.xp>=1000
+        ],
+
+        [
+            "grande",
+            ()=>player.completed.includes(
+                "grande"
+            )
+        ]
+
+    ];
+
+    let changed=false;
+
+    rules.forEach(
+        ([id,fn])=>{
+
+            if(
+                fn() &&
+                !player.badges.includes(id)
+            ){
+
+                player.badges.push(id);
+
+                changed=true;
+
+            }
+
+        }
+    );
+
+    if(changed){
+
+        save();
+
+    }
+
+}
+
+
+/* =========================================================
+   INICIAR QUIZ
+========================================================= */
+
+function startQuiz(id){
+
+    currentMissionId=id;
+
+    currentQuiz=
+        quizzes[id];
+
+    currentIndex=0;
+
+    currentScore=0;
+
+    answered=false;
+
+    document
+        .getElementById(
+            "quizOverlay"
+        )
+        .classList
+        .add("show");
+
+    document.getElementById(
+        "quizTitle"
+    ).textContent=
+        currentQuiz.title;
+
+    showQuestion();
+
+}
+
+
+/* =========================================================
+   MOSTRAR PERGUNTA
+========================================================= */
+
+function showQuestion(){
+
+    const q =
+        currentQuiz.questions[
+            currentIndex
+        ];
+
+    answered=false;
+
+    document.getElementById(
+        "qNumber"
+    ).textContent=
+        `Pergunta ${currentIndex+1} de ${currentQuiz.questions.length}`;
+
+    document.getElementById(
+        "qScore"
+    ).textContent=
+        currentScore;
+
+    document.getElementById(
+        "qProgress"
+    ).style.width=
+        (
+            (currentIndex+1) /
+            currentQuiz.questions.length *
+            100
+        )+"%";
+
+    document.getElementById(
+        "qIcon"
+    ).textContent=
+        currentQuiz.icon;
+
+    document.getElementById(
+        "qText"
+    ).textContent=
+        q[0];
+
+    const a =
+        document.getElementById(
+            "answers"
+        );
+
+    a.innerHTML="";
+
+    q[1].forEach(
+        (text,i)=>{
+
+            const b =
+                document.createElement(
+                    "button"
+                );
+
+            b.className="answer";
+
+            b.textContent=text;
+
+            b.onclick=()=>{
+                selectAnswer(
+                    i,
+                    b
+                );
+            };
+
+            a.appendChild(b);
+
+        }
+    );
+
+    const nb =
+        document.getElementById(
+            "quizNext"
+        );
+
+    nb.style.display="none";
+
+    nb.textContent =
+        currentIndex ===
+        currentQuiz.questions.length-1
+        ? "VER RESULTADO 🏆"
+        : "PRÓXIMA PERGUNTA →";
+
+}
+
+
+/* =========================================================
+   RESPONDER
+========================================================= */
+
+function selectAnswer(i,b){
+
+    if(answered){
+
+        return;
+
+    }
+
+    answered=true;
+
+    const q =
+        currentQuiz.questions[
+            currentIndex
+        ];
+
+    const all =
+        document.querySelectorAll(
+            "#answers .answer"
+        );
+
+    all.forEach(
+        x=>x.disabled=true
+    );
+
+    if(i===q[2]){
+
+        b.classList.add(
+            "correct"
+        );
+
+        currentScore++;
+
+    }else{
+
+        b.classList.add(
+            "wrong"
+        );
+
+        all[q[2]]
+            .classList
+            .add("correct");
+
+    }
+
+    document.getElementById(
+        "qScore"
+    ).textContent=
+        currentScore;
+
+    document.getElementById(
+        "quizNext"
+    ).style.display="block";
+
+}
+
+
+/* =========================================================
+   PRÓXIMA PERGUNTA
+========================================================= */
+
+function nextQuestion(){
+
+    if(
+        currentIndex <
+        currentQuiz.questions.length-1
+    ){
+
+        currentIndex++;
+
+        showQuestion();
+
+    }else{
+
+        finishQuiz();
+
+    }
+
+}
+
+
+/* =========================================================
+   FINALIZAR QUIZ
+========================================================= */
+
+function finishQuiz(){
+
+    const total =
+        currentQuiz.questions.length;
+
+    const mission =
+        missionsData.find(
+            m=>m.id===currentMissionId
+        );
+
+    const first =
+        !player.completed.includes(
+            currentMissionId
+        );
+
+    let earned =
+        currentScore * 25;
+
+    if(first){
+
+        earned += mission.xp;
+
+        player.completed.push(
+            currentMissionId
+        );
+
+    }
+
+    player.xp += earned;
+
+    player.coins +=
+        Math.max(
+            10,
+            currentScore * 5
+        );
+
+    const d=daily();
+
+    if(
+        !player.dailyDone &&
+        (
+            d.action==="any" ||
+            d.action===currentMissionId
+        )
+    ){
+
+        player.dailyDone=true;
+
+        player.xp += 100;
+
+        player.coins += 30;
+
+        earned += 100;
+
+    }
+
+    checkBadges();
+
+    save();
+
+    document
+        .getElementById(
+            "quizOverlay"
+        )
+        .classList
+        .remove("show");
+
+    document.getElementById(
+        "finalScore"
+    ).textContent=
+        `${currentScore}/${total}`;
+
+    document.getElementById(
+        "finalReward"
+    ).textContent=
+        `+${earned} XP`;
+
+    document.getElementById(
+        "resultTitle"
+    ).textContent=
+
+        currentScore===total
+        ? "PERFEITO!"
+        : currentScore>=4
+        ? "MUITO BEM!"
+        : "BOA TENTATIVA!";
+
+    document.getElementById(
+        "resultMsg"
+    ).textContent=
+        `Você acertou ${currentScore} de ${total} perguntas e recebeu recompensas. Continue sua jornada!`;
+
+    document.getElementById(
+        "resultBadge"
+    ).textContent=
+
+        first
+        ? "🏅 Missão concluída! Um novo progresso foi registrado."
+        : "⭐ Você já havia concluído esta missão. Continue praticando!";
+
+    document
+        .getElementById(
+            "resultOverlay"
+        )
+        .classList
+        .add("show");
+
+    renderAll();
+
+}
+
+
+/* =========================================================
+   FECHAR QUIZ
+========================================================= */
+
+function closeQuiz(){
+
+    document
+        .getElementById(
+            "quizOverlay"
+        )
+        .classList
+        .remove("show");
+
+}
+
+
+/* =========================================================
+   FECHAR RESULTADO
+========================================================= */
+
+function closeResult(){
+
+    document
+        .getElementById(
+            "resultOverlay"
+        )
+        .classList
+        .remove("show");
+
+    renderAll();
+
+}
+
+
+/* =========================================================
+   PERFIL
+========================================================= */
+
+function openProfile(){
+
+    document.getElementById(
+        "profileAvatar"
+    ).textContent=
+        player.avatar;
+
+    document.getElementById(
+        "profileName"
+    ).textContent=
+        player.name;
+
+    document.getElementById(
+        "profileLevel"
+    ).textContent=
+        `Nível ${level()}`;
+
+    document.getElementById(
+        "profileXP"
+    ).textContent=
+        player.xp;
+
+    document.getElementById(
+        "profileCoins"
+    ).textContent=
+        player.coins;
+
+    document.getElementById(
+        "profileMissions"
+    ).textContent=
+        player.completed.length;
+
+    document.getElementById(
+        "profileBadges"
+    ).textContent=
+        player.badges.length;
+
+    document
+        .getElementById(
+            "profileOverlay"
+        )
+        .classList
+        .add("show");
+
+}
+
+
+function closeProfile(){
+
+    document
+        .getElementById(
+            "profileOverlay"
+        )
+        .classList
+        .remove("show");
+
+}
+
+
+/* =========================================================
+   REINICIAR
+========================================================= */
+
+function resetGame(){
+
+    if(
+        confirm(
+            "Tem certeza que deseja apagar este progresso e começar novamente?"
+        )
+    ){
+
+        localStorage.removeItem(
+            STORAGE_KEY
+        );
+
+        location.reload();
+
+    }
+
+}
+
+
+/* =========================================================
+   AVISO
+========================================================= */
+
+let toastTimer;
+
+function toast(msg){
+
+    const t =
+        document.getElementById(
+            "toast"
+        );
+
+    t.textContent=msg;
+
+    t.classList.add(
+        "show"
+    );
+
+    clearTimeout(
+        toastTimer
+    );
+
+    toastTimer=setTimeout(
+        ()=>{
+            t.classList.remove(
+                "show"
+            );
+        },
+        2600
+    );
+
+}
+
+
+/* =========================================================
+   FECHAR MODAIS CLICANDO FORA
+========================================================= */
+
+document
+    .getElementById(
+        "quizOverlay"
+    )
+    .addEventListener(
+        "click",
+        e=>{
+
+            if(
+                e.target.id ===
+                "quizOverlay"
+            ){
+
+                closeQuiz();
+
+            }
+
+        }
+    );
+
+
+document
+    .getElementById(
+        "resultOverlay"
+    )
+    .addEventListener(
+        "click",
+        e=>{
+
+            if(
+                e.target.id ===
+                "resultOverlay"
+            ){
+
+                closeResult();
+
+            }
+
+        }
+    );
+
+
+document
+    .getElementById(
+        "profileOverlay"
+    )
+    .addEventListener(
+        "click",
+        e=>{
+
+            if(
+                e.target.id ===
+                "profileOverlay"
+            ){
+
+                closeProfile();
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+========================================================= */
+
+initAvatars();
+
+load();
+
+if(player){
+
+    showGame();
+
+}
+
+</script>
+
+</body>
+</html>
