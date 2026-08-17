@@ -18,7 +18,7 @@ O jogo foi criado para ser executado diretamente no navegador, sem necessidade d
 
 - Praticar desenvolvimento Front-end
 - Trabalhar estruturação de páginas com HTML
-- Desenvolver estilização e responsividade com CSS
+- Desenvolver estilização com CSS
 - Utilizar JavaScript para criar interações
 - Publicar uma aplicação web utilizando GitHub Pages
 
@@ -40,7 +40,6 @@ Para executar localmente:
 
 ```text
 jogo-desbravadores/
-│
 ├── index.html
 ├── estilo.css
 └── script.js
@@ -52,14 +51,3 @@ Milena Chagas da Silva
 Estudante de Análise e Desenvolvimento de Sistemas e desenvolvedora Front-end em formação.
 
 ⭐ Projeto desenvolvido para estudo, prática e evolução em desenvolvimento web.
-
-
-### Depois disso
-
-**NÃO clique ainda em "Comprometer mudanças..."**.
-
-Primeiro me mande um print da tela **depois que você colar o texto**.
-
-Quero conferir se o Markdown ficou correto antes de você fazer seu primeiro **commit**.
-
-E aqui começa uma parte importante do nosso aprendizado: **vou explicar para você o que é esse "commit" antes de você clicar nele.**
